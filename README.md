@@ -57,4 +57,6 @@
 下图是vue中MVVM模式的示意图
 
 ![MVP](https://github.com/fangfeiyue/vue-qu-na/blob/master/image/mvvm.png)
-  
+
+MVVM模式中也有视图层V和数据层M，但是没有P层取而代之的ViewModel层，从上图我们也可以看出VM层是vue自己带的，我们只需要关注M层和V层，更多是关注的M层就可以了。
+
