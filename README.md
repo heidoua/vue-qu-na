@@ -4,4 +4,6 @@
 ### MVVM模式
 
 传统开发中前端通常使用MVP设计模式
-![MPV]()
+
+![MVP](https://github.com/fangfeiyue/vue-qu-na/blob/master/image/chuantong.png)
+
