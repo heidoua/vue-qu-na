@@ -216,6 +216,10 @@ v-text、v-html、{{}}都可以现实变量中的内容，区别在于，如果�
 
 - 计算属性 `computed` 这个属性有一个重要的特性就是内置缓存，当它里面用于计算的属性的值都没有发生变化的时候，这个属性执行一次就不再执行了，除非参与计算的属性的值发生了变化。
 
+- 方法属性 `methods`
+- 监听属性 `watch`
+
+下面我们分别用这三个属性计算出一个完整的名字显示到页面上
 ```
 <!DOCTYPE html>
 <html lang="en">
@@ -240,7 +244,23 @@ v-text、v-html、{{}}都可以现实变量中的内容，区别在于，如果�
             // 计算属性
             computed: {
                 fullName: function(){
+                    console.log("计算了一次");
                     return this.firstName + this.lastName;
+                }
+            },
+            // 方法
+            methods: {
+                fullName: function(){
+                    return this.firstName + this.lastName;
+                }
+            },
+            // 监听器
+            watch: {
+                firstName: function(){
+                    this.fullName = this.firstName + this.lastName;
+                },
+                lastName: function(){
+                    this.fullName = this.firstName + this.lastName;
                 }
             }
         });
@@ -248,5 +268,5 @@ v-text、v-html、{{}}都可以现实变量中的内容，区别在于，如果�
 </body>
 </html>
 ```
-
+综合对比三种方法，如果用methods的话，每个数据变化都会执行一遍，没有这个必要，我们只需要firtName和lastName变化的时候执行即可，如果用监听器的话虽然firstName和lastName的值在程序运行过程中不变的话里面的方法执行一次就不再执行了，但代码明显多很多，还要监听多个变量，由此看来使用计算属性的话更能适合这种方式。
 
