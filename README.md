@@ -176,6 +176,7 @@ var app = new Vue({
 ```
 
 `$emit`方法可以向外触发事件。
+### 生命周期
 
-
+![生命周期图示](https://github.com/fangfeiyue/vue-qu-na/blob/master/image/lifecycle.png)
 

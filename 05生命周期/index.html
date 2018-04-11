@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue实例生命周期函数</title>
+</head>
+<body>
+    <div id="app">hello world</div>
+    <script src="../vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            beforeCreate: function () {
+                console.log("beforeCreate");
+            },
+            created: function(){
+                console.log("created");
+            },
+            beforeMount: function () {
+                console.log("beforeMount");
+            },
+            mounted: function () {
+                console.log("mounted");  
+            },
+            beforeDestroy: function () {
+                console.log("beforeDestroy");   
+            },
+            destroyed: function () {
+                console.log("destroyed");
+            },
+            beforeUpdate: function () {
+                console.log("beforeUpdate");
+            },
+            updated: function () {
+                console.log("updated");    
+            }
+
+        });
+    </script>
+</body>
+</html>
