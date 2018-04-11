@@ -60,3 +60,81 @@
 
 MVVM模式中也有视图层V和数据层M，但是没有P层取而代之的ViewModel层，从上图我们也可以看出VM层是vue自己带的，由此可以看出在使用MVVM进行开发Dom的操作被极大的简化了代码量会得到显著的减少，我们只需要关注M层和V层，更多是关注的M层就可以了。
 
+### 组件初始
+
+Vue中组件简单来说可以分为以下两种
+- 全局组件
+- 局部组件。
+
+下面我们就来写了个小demo来看看这两种组件如何使用。
+
+先来用Vue写一个阉割版todolist，这个只能实现添加功能，代码如下：
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TodoList</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="inputValue">
+        <button v-on:click="handleBtnClick">提交</button>
+        <ul>
+            <li v-for="item in list">{{item}}</li>
+        </ul>
+    </div>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                list:[],
+                inputValue: ''
+            },
+            methods: {
+                handleBtnClick: function(){
+                    this.list.push(this.inputValue);
+                    this.inputValue = '';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+```
+运行上述代码就实现了只带添加功能的TodoList，从运行结果看，添加的内容我们可以分装成一个组件也就是`ul`中的`li`标签。
+
+全局组件的运用，在`script`标签中添加如下代码
+```
+Vue.component("TodoItem", {
+    props: ['content'],
+    template: "<li>{{content}}</li>"
+});
+```
+上述代码中我们定义了一个Vue的全局组件`TodoItem`,下一步`<todo-item></todo-item>`替换`<li></li>`,注意我们定义的组件在使用的时候，字母要全部小写，大写字母转为小写后要用`-`连接，如`TodoItem`在使用时写为`todo-item`。
+
+上述为全局组件的使用，下面我们试试局部组件。
+
+在`script`标签中添加如下代码
+```
+var TodoItem = {
+    props: ['content'],
+    template: "<li>{{content}}</li>"
+};
+```
+注意，此时我们还不能直接使用局部组件，局部组件要在new Vue()中通过components注册后方可使用，代码如下:
+```
+var app = new Vue({
+    ...
+    components: {
+        TodoItem: TodoItem 
+    }
+    ...
+});
+```
+注册完成后就可以像全局组件一样使用局部组件了。
+
+
