@@ -212,5 +212,41 @@ v-text、v-html、{{}}都可以现实变量中的内容，区别在于，如果�
 </html>
 ```
 
+### 计算属性,方法与侦听器
+
+- 计算属性 `computed` 这个属性有一个重要的特性就是内置缓存，当它里面用于计算的属性的值都没有发生变化的时候，这个属性执行一次就不再执行了，除非参与计算的属性的值发生了变化。
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{fullName}}
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                firstName: 'Fang',
+                lastName: 'Feiyue'
+            },
+            // 计算属性
+            computed: {
+                fullName: function(){
+                    return this.firstName + this.lastName;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+```
 
 
