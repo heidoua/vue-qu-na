@@ -178,5 +178,39 @@ var app = new Vue({
 `$emit`方法可以向外触发事件。
 ### 生命周期
 
+生命周期函数就是Vue实例在某一个时间点会自动执行的函数.
+
 ![生命周期图示](https://github.com/fangfeiyue/vue-qu-na/blob/master/image/lifecycle.png)
+
+### Vue的模板语法初探
+v-text、v-html、{{}}都可以现实变量中的内容，区别在于，如果变量内容是被hmtl元素包裹的话，v-html会输出html语法中的样式，v-text和{{}}只输出普通的文本.
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{message}}
+        <div v-text="message"></div>
+        <div v-html="message"></div>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data: {
+                message: '<h1>hell world</h1>'
+            }
+        });
+    </script>
+</body>
+</html>
+```
+
+
 

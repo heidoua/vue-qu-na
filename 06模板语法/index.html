@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{message}}
+        <div v-text="message"></div>
+        <div v-html="message"></div>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data: {
+                message: '<h1>hell world</h1>'
+            }
+        });
+    </script>
+</body>
+</html>
