@@ -60,7 +60,7 @@
 
 MVVM模式中也有视图层V和数据层M，但是没有P层取而代之的ViewModel层，从上图我们也可以看出VM层是vue自己带的，由此可以看出在使用MVVM进行开发Dom的操作被极大的简化了代码量会得到显著的减少，我们只需要关注M层和V层，更多是关注的M层就可以了。
 
-### 组件初始
+### 组件初识
 
 Vue中组件简单来说可以分为以下两种
 - 全局组件
@@ -136,5 +136,46 @@ var app = new Vue({
 });
 ```
 注册完成后就可以像全局组件一样使用局部组件了。
+
+`注意：v-bind可以缩写为:，v-on可以缩写为@。`
+
+### 子组件向父组件传值初探
+
+上面我们只实现了简单的添加todo，如果我们已经完成了某了todo，点击对应的todo需要删掉它，该怎么实现呢？首先我们用的是Vue，就不需要特别关注dom的操作，我们只需要处理数据即可，当我们点击某项todo，只要删除list数组中选中的项即可，数组中的数据发生了变化，页面也会跟随着变化。
+
+首先我们分别修改html部分和js部分的代码
+```
+// html
+<todo-list
+    :index="index"
+    @delete="handleItemDelete"  
+>
+</todo-list>
+
+// js
+var TodoList = {
+    props: ['content', 'index'],
+    template: "<li @click='handleItemClick'>{{content}}</li>",
+    methods: {
+        handleItemClick: function(){
+            this.$emit("delete", this.index);
+        }
+    }
+};
+
+var app = new Vue({
+    ...
+    methods: {
+        ...
+        handleItemDelete: function(index){
+            // 删除数组中指定索引的元素
+            this.list.splice(index, 1);
+        }
+    }
+});
+```
+
+`$emit`方法可以向外触发事件。
+
 
 
