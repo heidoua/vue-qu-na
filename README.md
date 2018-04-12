@@ -682,3 +682,46 @@ var app = new Vue({
     });
 </script>
  ```
+ ### 父子组件间的数据传递
+
+ ```
+ <div id="app">
+    <counter count="0" @change="handleClick"></counter>
+    <counter count="0" @change="handleClick"></counter>
+    {{total}}
+</div>
+<script src="../vue.js"></script>
+<script>
+    var counter = {
+        props: ['count'],
+        data: function(){
+            return {
+                number: this.count
+            };
+        },
+        template: '<div @click="handleClick">{{number}}</div>',
+        methods: {
+            handleClick: function () {
+                this.number++;
+                this.$emit('change', 1);
+            }
+        }
+    };
+    var app = new Vue({
+        el: '#app',
+        components: {
+            counter: counter
+        },
+        data: {
+            total: 0
+        },
+        methods: {
+            handleClick: function(value){
+                this.total += value;
+            }
+        }
+    });
+</script>
+ ```
+
+父组件向子组件传值通过props即可，子组件向父组件传值需要通过事件，注意，vue是单向数据流，子组件不能直接修改父组件传递过来的值，实在要修改的话可以用一个变量承接，修改这个副本。
