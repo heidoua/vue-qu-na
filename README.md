@@ -313,3 +313,93 @@ v-text、v-html、{{}}都可以现实变量中的内容，区别在于，如果�
 ```
 对比过代码后，我们发现在`computed`属性中我们把之前fullName方法改成了对象，并且在这个对象中新增了两个方法一个是get一个是set。当我们获取fullName值时，会执行get方法，set方法在我们改变fullNmae值的时候回执行，将fullName改变前的值当做传入set方法中。这个例子中，我们在set方法中又重新操作了firstName和lastName，这两种值的变化会重新引起computed执行，从而更新fullName的值。
 
+### Vue中的样式绑定
+
+1. 类的使用
+
+方式一,对象方式：
+```
+// html文件
+<div 
+    @click="handleDivClick"
+    :class="{activated: isActivated}"
+>
+    hello world
+</div>
+
+// js文件
+var app = new Vue({
+    el: '#app',
+    data: {
+        isActivated: false,
+    },
+    methods: {
+        handleDivClick: function(){
+            this.isActivated = !this.isActivated;
+        }
+    }
+});
+```
+
+方式二，数组方式：
+```
+// html
+<div 
+    @click="handleDivClick"
+    :class="[activated]"
+>
+    hello world
+</div>
+
+// js文件
+var app = new Vue({
+    el: '#app',
+    data: {
+        activated: ''
+    },
+    methods: {
+        handleDivClick: function(){
+            this.activated = this.activated  ? '' : 'activated';
+        }
+    }
+});
+```
+既然是class既然给的是一个数组，数组中肯定可以包含多个元素，即元素可以有多个类名
+
+2. style的使用
+
+对象方式
+```
+// html
+<div 
+    @click="handleDivClick"
+    :style="styleObj"
+>
+    hello world
+</div>
+
+// js
+var app = new Vue({
+    el: '#app',
+    data: {
+        styleObj: {
+            color: ''
+        }
+    },
+    methods: {
+        handleDivClick: function(){
+            this.styleObj.color = this.styleObj.color ? '' : 'red';
+        }
+    }
+});
+```
+
+数组方式
+```
+<div 
+    @click="handleDivClick"
+    :style="[styleObj, {fontSize:'12px'}]"
+>
+    hello world
+</div>
+```
