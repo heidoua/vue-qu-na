@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button @click='handleAddItem'>添加元素</button>
+        <div v-for="(item, key) of obj" :key="key">{{item}}</div>
+        <div>
+            <div v-for="item of list" :key="item">{{item}}</div>
+        </div>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                obj: {
+                    name :'fang',
+                    age: 18,
+                    tel: '18888888888'
+                },
+                list: [1, 2, 3, 4, 5]
+            },
+            methods: {
+                handleAddItem: function(){
+                    // 改变对象的值
+                    this.$set(this.obj, 'sex', '男');    
+                    
+                    // 改变数组中的值
+                    Vue.set(this.list, 6, 6);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

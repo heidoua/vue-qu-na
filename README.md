@@ -521,3 +521,40 @@ var app = new Vue({
     });
 </script>
 ```
+
+### Vue中的set方法
+上述代码，当我们改变数组中的元素引起页面重新渲染可以使用pop、push、shift等数组方法，或者给数组变变量重新赋值新数组来改变它的引用。当我们改变对象中的属性来引起页面重新渲染，只能通过改变它的引用。
+
+我们还可以用Vue中的set属性来改变数组或对象的值，来引起页面的重新渲染。
+```
+<div id="app">
+    <button @click='handleAddItem'>添加元素</button>
+    <div v-for="(item, key) of obj" :key="key">{{item}}</div>
+    <div>
+        <div v-for="item of list" :key="item">{{item}}</div>
+    </div>
+</div>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            obj: {
+                name :'fang',
+                age: 18,
+                tel: '18888888888'
+            },
+            list: [1, 2, 3, 4, 5]
+        },
+        methods: {
+            handleAddItem: function(){
+                // 改变对象的值
+                this.$set(this.obj, 'sex', '男');    
+                
+                // 改变数组中的值
+                Vue.set(this.list, 6, 6);
+            }
+        }
+    });
+</script>
+```
