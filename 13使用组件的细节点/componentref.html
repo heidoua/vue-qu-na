@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <counter ref="one" @change="handleChange"></counter>
+        <counter ref="two" @change="handleChange"></counter>
+        <div>{{total}}</div>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        Vue.component('counter', {
+            template: "<div @click='handleClick'>{{number}}</div>",
+            data: function(){
+                return {
+                    number: 0
+                };
+            },
+            methods: {
+                handleClick: function(){
+                    this.number++;
+                    this.$emit('change');
+                }
+            }
+        });
+        var app = new Vue({
+            el: '#app',
+            data: {
+                total:0
+            },
+            methods:{
+                handleChange: function(){
+                    this.total = this.$refs.one.number + this.$refs.two.number;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
