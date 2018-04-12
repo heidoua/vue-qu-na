@@ -486,5 +486,38 @@ var app = new Vue({
 ```
 
 上述代码如果去掉input中对应的key值，在密码框输入数字，当改变show值时，input的标题已经变成姓名，但输入框中依然是之前用的密码的输入框，原因是vue会尽可能的复用页面上的元素，当给input赋值不同的key后页面就会显示正常，这里涉及到了diff算法，后期专门讲解。
+### Vue中的列表渲染
 
-
+遍历数组和对象
+```
+<div id="app">
+    <div v-for="(item, index) of list" :key="index">
+        {{index}}=>{{item}}
+    </div>
+    <div v-for="(item, key, index) of obj" :key="key">
+        {{index}}=>{{key}}=>{{item}}
+    </div>
+</div>
+<script src="../vue.js"></script>
+<script>
+    // pop、push、shift、unshift、splice、 sort、reverse、
+    var app = new Vue({
+        el: '#app',
+        data: {
+            list: [
+                '房飞跃',
+                '逗逗',
+                '卢浩峰',
+                '张明远',
+                '张力战',
+                '呼啦圈'
+            ],
+            obj: {
+                name: 'fang',
+                age: 18,
+                score: 150
+            }
+        }
+    });
+</script>
+```

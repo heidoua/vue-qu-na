@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div v-for="(item, index) of list" :key="index">
+            {{index}}=>{{item}}
+        </div>
+        <div v-for="(item, key, index) of obj" :key="key">
+            {{index}}=>{{key}}=>{{item}}
+        </div>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        // pop、push、shift、unshift、splice、 sort、reverse、
+        var app = new Vue({
+            el: '#app',
+            data: {
+                list: [
+                    '房飞跃',
+                    '逗逗',
+                    '卢浩峰',
+                    '张明远',
+                    '张力战',
+                    '呼啦圈'
+                ],
+                obj: {
+                    name: 'fang',
+                    age: 18,
+                    score: 150
+                }
+            }
+        });
+    </script>
+</body>
+</html>
