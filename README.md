@@ -558,3 +558,33 @@ var app = new Vue({
     });
 </script>
 ```
+### 使用组件的细节点
+- is 属性
+```
+<div id="app">
+    <table>
+        <tbody>
+            <tr is="row"></tr>
+            <tr is="row"></tr>
+            <tr is="row"></tr>
+        </tbody>
+    </table>
+</div>
+<script src="../vue.js"></script>
+<script>
+    var row = {
+        template: '<tr><td>3item</td></tr>'
+    };
+
+    var app = new Vue({
+        el: '#app',
+        components: {
+            row: row
+        }
+    });
+</script>
+```
+上述代码当我们成功运行后，表面上看浏览器是呈现了三个3item，好像一切正常，但当我们审查元素会发现tr标签跑道table标签外面显示了，这显然不对，主要是tbody标签中必须放tr标签，tbody不能识别我们定义的组件row，浏览解析的时候就会出问题。
+
+这个时候我们可以用is来解决这种问题,将tbody中的`<row></row>`换成`<tr is="row"></tr>`,此时再刷新页面审查元素发现Dom结构正确了。
+
