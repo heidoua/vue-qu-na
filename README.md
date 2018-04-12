@@ -464,3 +464,27 @@ var app = new Vue({
 
 `注意：v-if、v-else-if、v-else一起使用时中间不能有其他元素阻隔他们，一定要在一起写`
 
+### key值初始
+```
+<div id="app">
+    <div v-if="show">
+        姓名<input key="userName" type="text" name="" id="">
+    </div>
+    <div v-else="show">
+        密码<input key="email" type="text" name="" id="">
+    </div>
+</div>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            show: false
+        }
+    });
+</script>
+```
+
+上述代码如果去掉input中对应的key值，在密码框输入数字，当改变show值时，input的标题已经变成姓名，但输入框中依然是之前用的密码的输入框，原因是vue会尽可能的复用页面上的元素，当给input赋值不同的key后页面就会显示正常，这里涉及到了diff算法，后期专门讲解。
+
+

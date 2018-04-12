@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div v-if="show">
+            姓名<input key="userName" type="text" name="" id="">
+        </div>
+        <div v-else="show">
+            密码<input key="email" type="text" name="" id="">
+        </div>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                show: false
+            }
+        });
+    </script>
+</body>
+</html>
