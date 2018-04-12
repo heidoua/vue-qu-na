@@ -559,7 +559,7 @@ var app = new Vue({
 </script>
 ```
 ### 使用组件的细节点
-- is 属性
+1. is 属性
 ```
 <div id="app">
     <table>
@@ -588,3 +588,37 @@ var app = new Vue({
 
 这个时候我们可以用is来解决这种问题,将tbody中的`<row></row>`换成`<tr is="row"></tr>`,此时再刷新页面审查元素发现Dom结构正确了。
 
+2. 在子组件中定义data，data必须是一个函数并且发挥一个对象
+```
+<div id="app">
+    <table>
+        <tbody>
+            <tr is="row"></tr>
+            <tr is="row"></tr>
+            <tr is="row"></tr>
+        </tbody>
+    </table>
+</div>
+<script src="../vue.js"></script>
+<script>
+    var row = {
+        // 报错，在子组件中定义data，data必须是一个函数并且发挥一个对象
+        // data:{
+        //     content: '3item'
+        // },
+        data: function(){
+            return {
+                content: '3item'
+            };
+        },
+        template: '<tr><td>{{content}}</td></tr>'
+    };
+
+    var app = new Vue({
+        el: '#app',
+        components: {
+            row: row
+        }
+    });
+</script>
+```
