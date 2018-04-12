@@ -403,3 +403,64 @@ var app = new Vue({
     hello world
 </div>
 ```
+### Vue中的条件渲染
+
+1. v-show和v-if都能控制页面元素的显示，v-if对应的值为false时元素不会被渲染到Dom结构中，v-show对应的值为false时，元素会被渲染到Dom结构中只不过它的display为none。当我们频繁的去操作一个元素显示和隐藏时用v-show更合适，它不会频繁的将这个元素从Dom中删除再添加,性能要高些。
+```
+<div id="app">
+        <div  v-if="show">{{message}}</div>
+        <div  v-show="show">{{message}}</div>
+</div>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            show: false,
+            message: 'hello world'
+        }
+    });
+</script>
+```
+
+2. v-if、v-else的使用
+```
+<div id="app">
+    <div  v-if="show">{{message}}</div>
+    <div v-else>I love doudou</div>
+</div>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            show: false,
+            message: 'hello world'
+        }
+    });
+</script>
+```
+
+`注意：v-if和v-else一起使用时中间不能有其他元素阻隔他俩，一定要在一起写`
+
+3. v-if、v-else的使用
+```
+<div id="app">
+    <div  v-if="show=='if'">if</div>
+    <div  v-else-if="show=='else if'">else if</div>
+    <div v-else>else</div>
+</div>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            show: false,
+            message: 'hello world'
+        }
+    });
+</script>
+```
+
+`注意：v-if、v-else-if、v-else一起使用时中间不能有其他元素阻隔他们，一定要在一起写`
+
