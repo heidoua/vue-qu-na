@@ -625,8 +625,8 @@ var app = new Vue({
 因为子组件可能会被调用多次，所以每个子组件都应该有自己的数据，不应该共享一套数据， 通过一个函数来返回一个对象的目的就是为了让每个子组件都有自己的独立存储，这样的话不会出现多个子组件互相影响的情况。
 
 3. refs引用
- 1. ref 应用在dom元素上
- 
+ - ref 应用在dom元素上
+
  在某些特殊情况下我们可能是需要操作Dom元素，这是我们可以使用ref
  ```
  <div id="app">
@@ -646,7 +646,7 @@ var app = new Vue({
  ```
  上述代码我们通过给div元素添加ref属性，在js中用this.$refs.hello获取到了div元素
 
- 2. ref应用在子组件上
+ - ref应用在子组件上
  ```
  <div id="app">
     <counter ref="one" @change="handleChange"></counter>
