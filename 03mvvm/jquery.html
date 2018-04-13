@@ -11,6 +11,7 @@
      <div>
          <input id="input" type="text">
          <button id="btn">提交</button>
+         <button id="btn1">提交</button>
          <ul id="list">
          </ul>
      </div>
@@ -31,11 +32,20 @@
                  var inputValue = inputElem.val();
                  var ulElem = $('#list');
                  ulElem.append('<li>' + inputValue + '</li>');
+                 
+                 if (this.validate()){
+                     alert('登录成功执行一些事件');
+                 }
+             },
+             validate:function(){
+                 alert('验证登录信息');
+                 return true;
              }
          });
 
          var page = new Page();
          page.init();
+         console.log(page)
      </script>
 </body>
 </html>
