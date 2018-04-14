@@ -734,7 +734,7 @@ var app = new Vue({
 ```
 var child = {
     props: {
-        content: [String, Number],
+        content: [String, Number], // 类型的校验，多个类型要放在数组里
         content: {
             type: String, // 类型的校验
             required: true, // 是否必须
@@ -766,4 +766,86 @@ var child = {
 ```
 成功运行上述代码后,打开浏览器控制台审查元素就会看到`<div content="123"></div>`div上显示了父组件传递过来的属性
 
+### 给组件绑定原生事件
+
+```
+// html
+<div id="app">
+    <child @click="handleClick"></child>
+</div>
+
+// js
+var child = {
+    template:"<div>child</div>",
+};
+
+var app = new Vue({
+    el: '#app',
+    components: {
+        child: child
+    },
+    methods: {
+        handleClick: function(){
+            alert('click');
+        }
+    }
+});
+```
+
+如上代码，当我们直接点击child的组件浏览器并不会弹出click，要想弹出click必修跟child组件中的div绑定事件，然后在child组件中的methods属性中定义对应的方法，通过this.$emit触发外层的handleClick方法，从而弹出click
+```
+<div id="app">
+    <child @click="handleClick"></child>
+</div>
+<script src="../vue.js"></script>
+<script>
+
+    var child = {
+        template:"<div @click='handleClick'>child</div>",
+        methods: {
+            handleClick: function(){
+                this.$emit('click');
+            }
+        }
+    };
+
+    var app = new Vue({
+        el: '#app',
+        components: {
+            child: child
+        },
+        methods: {
+            handleClick: function(){
+                alert('click');
+            }
+        }
+    });
+</script>
+```
+这也未免操作有点麻烦，我们可以通过给父组件传递的@click后加一个native属性实现click的弹出
+```
+<div id="app">
+    <child @click.native="handleClick"></child>
+</div>
+<script src="../vue.js"></script>
+<script>
+
+    var child = {
+        template:"<div>child</div>"
+    };
+
+    var app = new Vue({
+        el: '#app',
+        components: {
+            child: child
+        },
+        methods: {
+            handleClick: function(){
+                alert('click');
+            }
+        }
+    });
+</script>
+```
+这样代码就会简洁很多。
 
