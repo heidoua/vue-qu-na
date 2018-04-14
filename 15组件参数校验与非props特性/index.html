@@ -8,13 +8,23 @@
 </head>
 <body>
     <div id="app">
-        <child content="hello world"></child>
+        <child content="123"></child>
     </div>
     <script src="../vue.js"></script>
     <script>
 
         var child = {
-            props: ['content'],
+            // props: {
+            //     content: [String, Number],
+            //     content: {
+            //         type: String, // 类型的校验
+            //         required: true, // 是否必须
+            //         default: 'doudou', // 默认值
+            //         validator: function(value){ //  自定义校验器
+            //              return value.length > 5;
+            //         }
+            //     }
+            // },
             template:"<div>{{content}}</div>"
         };
 

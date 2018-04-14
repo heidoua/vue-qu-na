@@ -727,3 +727,43 @@ var app = new Vue({
 父组件向子组件传值通过props即可，子组件向父组件传值需要通过事件，注意，vue是单向数据流，子组件不能直接修改父组件传递过来的值，实在要修改的话可以用一个变量承接，修改这个副本。
 
 ### 组件参数校验与非props特性
+
+1.校验
+
+父组件可以向子组件传递属性值，子组件也可以通过props接收父组件传递过来的值，同时我们可以为组件的 prop 指定验证规则。如果传入的数据不符合要求，Vue 会发出警告。这对于开发给他人使用的组件非常有用。
+```
+var child = {
+    props: {
+        content: [String, Number],
+        content: {
+            type: String, // 类型的校验
+            required: true, // 是否必须
+            default: 'doudou', // 默认值
+            validator: function(value){ //  自定义校验器
+                    return value.length > 5;
+            }
+        }
+    },
+    template:"<div>{{content}}</div>"
+};
+```
+
+2. 非 Prop 特性
+
+父组件向子组件传递了值，但子组件不通过prop进行接收，这是就不能直接使用父组件传递过来的值。 同时，父组件传递过来的属性值会显示在子组件最外层html标签上
+```
+// html
+...
+<div id="app">
+    <child content="123"></child>
+</div>
+
+// js
+var child = {
+    template:"<div>{{content}}</div>"
+};
+...
+```
+成功运行上述代码后,打开浏览器控制台审查元素就会看到`<div content="123"></div>`div上显示了父组件传递过来的属性
+
+
