@@ -851,3 +851,31 @@ var app = new Vue({
 
 ### 在Vue中使用插槽
 
+当我们想要给子组件中传递dom元素时，我们可以怎么做呢？
+
+首先根据前面的知识我们一定能想到用父组件给子组件传值的方法，本例以传递一个`<div>hello world</div>`为例
+```
+<div id="app">
+    <child content="<p>hello world</p>">
+        
+    </child>
+</div>
+<script src="../vue.js"></script>
+<script>
+    var child = {
+        props: ['content'],
+        template: '<div v-html="content">{{content}}</div>'
+    };
+    var app = new Vue({
+        el: '#app',
+        components: {
+            child
+        }
+    });
+</script>
+```
+运行上述代码，浏览器页面就会出现hello world。但是当我审查元素的时候就会发现我们明明只写了两层p，浏览器却生成了三层p，这不是我们想要的结果，并且，如果我们传入的dom元素多的时候，代码看起来就会很混乱。这时我们就需要使用到插槽了，更改上述代码如下。
+```
+
+```
+
