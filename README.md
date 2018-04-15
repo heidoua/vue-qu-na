@@ -853,10 +853,10 @@ var app = new Vue({
 
 当我们想要给子组件中传递dom元素时，我们可以怎么做呢？
 
-首先根据前面的知识我们一定能想到用父组件给子组件传值的方法，本例以传递一个`<div>hello world</div>`为例
+首先根据前面的知识我们一定能想到用父组件给子组件传值的方法，本例以传递一个`<p>hello world</p>`为例
 ```
 <div id="app">
-    <child content="<p>hello world</p>">
+    <child content="<p>hell world</p>">
         
     </child>
 </div>
@@ -864,7 +864,10 @@ var app = new Vue({
 <script>
     var child = {
         props: ['content'],
-        template: '<div v-html="content">{{content}}</div>'
+        template: `<div>
+            <p>test</p>
+            <div v-html="this.content"></div>
+        </div>`
     };
     var app = new Vue({
         el: '#app',
@@ -874,8 +877,31 @@ var app = new Vue({
     });
 </script>
 ```
-运行上述代码，浏览器页面就会出现hello world。但是当我审查元素的时候就会发现我们明明只写了两层p，浏览器却生成了三层p，这不是我们想要的结果，并且，如果我们传入的dom元素多的时候，代码看起来就会很混乱。这时我们就需要使用到插槽了，更改上述代码如下。
+运行上述代码，浏览器页面就会出现hello world。但是当我审查元素的时候就会发现hello world的p元素外面包裹了一层div，而我们只想显示p里面的hello world，这不是我们想要的结果，并且如果我们传入的dom元素多的时候，代码看起来就会很混乱。这时我们就需要使用到插槽了，更改上述代码如下。
 ```
+<div id="app">
+    <child>
+        <p>hell world</p>
+    </child>
+</div>
+<script src="../vue.js"></script>
+<script>
+    var child = {
+        props: ['content'],
+        template: `<div>
+            <p>test</p>
+            <slot></slot>
+        </div>`
+    };
+    var app = new Vue({
+        el: '#app',
+        components: {
+            child
+        }
+    });
+</script>
+```
+我们在引用child组件里直接输入了`<p>hello world</p>`，然后在组件里直接用`<slot></slot>`来接收，slot就是我们所说的插槽。
 
-```
+
 

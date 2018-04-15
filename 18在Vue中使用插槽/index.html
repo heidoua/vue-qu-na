@@ -9,15 +9,18 @@
 </head>
 <body>
     <div id="app">
-        <child content="<p>hello world</p>">
-
+        <child>
+            <p>hell world</p>
         </child>
     </div>
     <script src="../vue.js"></script>
     <script>
         var child = {
             props: ['content'],
-            template: '<div v-html="content">{{content}}</div>'
+            template: `<div>
+                <p>test</p>
+                <slot></slot>
+            </div>`
         };
         var app = new Vue({
             el: '#app',
