@@ -1004,6 +1004,99 @@ slot标签还可以写默认内容。上述代码，如果我们不让child包�
 </html>
 ```
 ### 作用域插槽
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <child>
+        </child>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+    <script>
+        var child = {
+            data: function(){
+                return {
+                    list: [1, 2, 3, 4, 5]
+                };
+            },
+            template:`<div>
+                        <ul>
+                            <li v-for="item of list">{{item}}</li>
+                        </ul>
+                    </div>`
+        };
+        var app = new Vue({
+            el:'#app',
+            components: {
+                child
+            }
+        });
+    </script>
+</body>
+</html>
+```
+上述代码我们调用了child组件显示child组件中list数组中的内容，运行代码，结果显示正确。但是child组件可能在很多地方会被调用，我们希望根据不同的调用情况来控制子组件显示的内容和样式该怎么实现呢？
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <child>
+            <template slot-scope="props">
+                <li>
+                    {{props.item}}
+                </li>
+            </template>
+        </child>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+    <script>
+        var child = {
+            data: function(){
+                return {
+                    list: [1, 2, 3, 4, 5]
+                };
+            },
+            template:`<div>
+                        <ul>
+                            <slot v-for="item of list" :item=item></slot>
+                        </ul>
+                    </div>`
+        };
+        var app = new Vue({
+            el:'#app',
+            components: {
+                child
+            }
+        });
+    </script>
+</body>
+</html>
+```
+上述代码我们将child组件中的li标签用slot代替了，父组件中我们向子组件传递了
+```
+<template slot-scope="props">
+    <li>
+        {{props.item}}
+    </li>
+</template>
+```
+注意，一定要用`template`包裹想传给子组件的元素，`slot-scope`接收子组件传递过来的数据。`slot-scrope`的值不必非要是props可以根据自己需求来。
+
+
 
 ### 联系方式
 
