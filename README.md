@@ -1,6 +1,20 @@
 # vue仿去哪网
 从Vue基础语法入手，逐层递进，项目贴近企业流程，完全按照企业级别代码质量和工程开发流程进行，让你理解这套技术在企业中被使用的真实流程。更好的掌握Vue各个基础知识点。包括Vue中的CSS动画原理、Vue中使用animate.css库、Vue中同时使用过渡与动画效果、Vue中使用Velocity.js库、Vue中多组件和列表过度 、Vue中动画的封装、vuex等等
 
+### 下载源码
+```
+https://github.com/fangfeiyue/vue-qu-na.git
+```
+### 技术选型
+- 版本控制：git
+- 开发工具：vscode
+- 前端：Vue2.5
+- 模块化方案：ES6 + Webpack
+- 前后端分离方式：完全分离，纯静态方式
+### 项目文件目录大概说明
+- image文件主要放了一些readme文件需要的图片
+- setting_up梳理项目前期的一些知识点，方便初学Vue的同学学习
+- project是项目文件
 ## 项目前期知识准备
 ### MVVM模式
 
