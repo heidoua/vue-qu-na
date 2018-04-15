@@ -851,6 +851,8 @@ var app = new Vue({
 
 ### 在Vue中使用插槽
 
+1.简单的插槽使用
+
 当我们想要给子组件中传递dom元素时，我们可以怎么做呢？
 
 首先根据前面的知识我们一定能想到用父组件给子组件传值的方法，本例以传递一个`<p>hello world</p>`为例
@@ -882,6 +884,7 @@ var app = new Vue({
 <div id="app">
     <child>
         <p>hell world</p>
+        <p>hell world</p>
     </child>
 </div>
 <script src="../vue.js"></script>
@@ -902,6 +905,93 @@ var app = new Vue({
 </script>
 ```
 我们在引用child组件里直接输入了`<p>hello world</p>`，然后在组件里直接用`<slot></slot>`来接收，slot就是我们所说的插槽。
+
+slot标签还可以写默认内容。上述代码，如果我们不让child包裹任何dom元素，子组件的slot中改写为`<slot>default value</slot>`运行代码页面就会显示出default value。
+
+2. 具名插槽
+
+上述代码我们看出slot代表的是child包裹的所有dom元素，但当我们想查分使用传入的元素改怎么办呢？
+```
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <child>
+            <p>header</p>
+            <p>footer</p>
+        </child>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+    <script>
+        var child = {
+            props: ['content'],
+            template: `<div>
+                <slot></slot>
+                <p>test</p>
+                <slot></slot>
+            </div>`
+        };
+        var app = new Vue({
+            el: '#app',
+            components: {
+                child
+            }
+        });
+    </script>
+</body>
+
+</html>
+```
+上述代码们想将footer和header分别插在test的上面和下面，运行代码后看到并不是我们想要的结果，原因是slot代表所有child插入的dom元素。如果想实现这种效果改怎么办呢？这时我们就需要使用到具名插槽了，分别给header和footer添加属性 slot="header"和slot="footer",然后再在child子组件中给slot赋值name属性,运行代码就会得到我们想要的结果
+```
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <child>
+            <p slot="header">header</p>
+            <p slot="footer">footer</p>
+        </child>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+    <script>
+        var child = {
+            props: ['content'],
+            template: `<div>
+                <slot name="header"></slot>
+                <p>test</p>
+                <slot name="footer"></slot>
+            </div>`
+        };
+        var app = new Vue({
+            el: '#app',
+            components: {
+                child
+            }
+        });
+    </script>
+</body>
+
+</html>
+```
+
+
+
+
 
 
 

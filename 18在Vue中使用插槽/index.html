@@ -10,16 +10,18 @@
 <body>
     <div id="app">
         <child>
-            <p>hell world</p>
+            <p slot="header">header</p>
+            <p slot="footer">footer</p>
         </child>
     </div>
-    <script src="../vue.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
     <script>
         var child = {
             props: ['content'],
             template: `<div>
+                <slot name="header"></slot>
                 <p>test</p>
-                <slot></slot>
+                <slot name="footer"></slot>
             </div>`
         };
         var app = new Vue({
