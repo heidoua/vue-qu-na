@@ -1096,6 +1096,111 @@ slot标签还可以写默认内容。上述代码，如果我们不让child包�
 ```
 注意，一定要用`template`包裹想传给子组件的元素，`slot-scope`接收子组件传递过来的数据。`slot-scrope`的值不必非要是props可以根据自己需求来。
 
+### 动态组件与v-once指令
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <child-one v-if="type === 'child-one'"></child-one>
+        <child-two v-else></child-two>
+        <button @click="handleBtnClick">change</button>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+    <script>
+        var childOne = {
+            template: "<div>child-one</div>"
+        };
+        
+        Vue.component('child-two', {
+            template: "<div>child-two</div>"
+        });
+
+        var app = new Vue({
+            el: "#app",
+            components: {
+                childOne
+            },
+            data: {
+                type:'child-one' 
+            },
+            methods: {
+                handleBtnClick: function() {
+                    console.log('点击了我');
+                    this.type = this.type === 'child-one' ? 'child-two' :'child-one'
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+```
+上述代码当我点击change按钮的时候，实现了child-one和child-two来回切换，但如果我们需要切换的组件比较多的时候这样操作就比较麻烦，这是我们可以使用Vue提供的动态组件来实现这个功能。通过使用保留的 `<component>` 元素，并对其 `is` 特性进行动态绑定，就可以在同一个挂载点动态切换多个组件了。上述代码中的
+```
+<child-one v-if="type === 'child-one'"></child-one>
+<child-two v-else></child-two>
+```
+替换为
+```
+<component :is="type"></component>
+```
+即可动态切换多个组件。完整代码如下
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <component :is="type"></component>
+        <!-- <child-one v-if="type === 'child-one'"></child-one>
+        <child-two v-else></child-two> -->
+        <button @click="handleBtnClick">change</button>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+    <script>
+        var childOne = {
+            template: "<div>child-one</div>"
+        };
+        
+        Vue.component('child-two', {
+            template: "<div>child-two</div>"
+        });
+
+        var childThree = {
+            template: "<div>child-three</div"
+        };
+
+        var app = new Vue({
+            el: "#app",
+            components: {
+                childOne,
+                childThree
+            },
+            data: {
+                type:'child-one' 
+            },
+            methods: {
+                handleBtnClick: function() {
+                    this.type = this.type==='child-one'?'child-two':this.type==='child-three'?'child-one':'child-three';
+                },
+            }
+        });
+    </script>
+</body>
+</html>
+```
+
 
 
 ### 联系方式

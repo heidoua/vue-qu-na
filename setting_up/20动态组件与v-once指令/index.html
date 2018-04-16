@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <component :is="type"></component>
+        <!-- <child-one v-if="type === 'child-one'"></child-one>
+        <child-two v-else></child-two> -->
+        <button @click="handleBtnClick">change</button>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+    <script>
+        var childOne = {
+            template: "<div>child-one</div>"
+        };
+        
+        Vue.component('child-two', {
+            template: "<div>child-two</div>"
+        });
+
+        var childThree = {
+            template: "<div>child-three</div"
+        };
+
+        var app = new Vue({
+            el: "#app",
+            components: {
+                childOne,
+                childThree
+            },
+            data: {
+                type:'child-one' 
+            },
+            methods: {
+                handleBtnClick: function() {
+                    this.type = this.type==='child-one'?'child-two':this.type==='child-three'?'child-one':'child-three';
+                },
+            }
+        });
+    </script>
+</body>
+</html>
