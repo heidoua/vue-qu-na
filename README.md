@@ -1248,7 +1248,50 @@ Vue 的过渡系统有了彻底的改变，现在通过使用 `<transition>` 和
 </html>
 ```
 transition中name为string类型，用于自动生成 CSS 过渡类名。例如：name: 'fade' 将自动拓展为.fade-enter，.fade-enter-active等。默认类名为 "v"
+### 在Vue中使用animate.css库
+上面我们简单的实现了一些动画效果，但是用的自带的，如果我们自己想定义一些动画，或者使用第三方动画库改怎么办呢？下面我们以animate.css为例。
 
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        
+    </style>
+    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <transition
+            enter-active-class="animated flash"
+            leave-active-class="animated rubberBand"
+        >
+            <div v-if="show">hello world</div>
+        </transition>    
+        <button @click="handleBtnClick">切换</button>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                show: false
+            },
+            methods: {
+                handleBtnClick: function(){
+                    this.show = !this.show;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+```
+首先给`transition`添加`enter-active-class`和`leave-active-class`两个属性，这个两个属性分别赋值我们想给的类名（自己写的也可以哦）即可。
 ### 联系方式
 
 坐标：北京
