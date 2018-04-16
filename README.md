@@ -1247,6 +1247,8 @@ Vue 的过渡系统有了彻底的改变，现在通过使用 `<transition>` 和
 </body>
 </html>
 ```
+transition中name为string类型，用于自动生成 CSS 过渡类名。例如：name: 'fade' 将自动拓展为.fade-enter，.fade-enter-active等。默认类名为 "v"
+
 ### 联系方式
 
 坐标：北京
