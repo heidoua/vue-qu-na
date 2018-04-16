@@ -1202,8 +1202,51 @@ slot标签还可以写默认内容。上述代码，如果我们不让child包�
 ```
 但是上述代码还是有问题的，上述代码在组件来回切换的时候步骤大概为当一个组件不显示了就销毁需要显示的时候再创建，如果切换的组件较多这样就会比较耗费性能。我们可以给每个组件添加个`v-once`指令，这个指令只渲染元素和组件一次。随后的重新渲染，元素/组件及其所有的子节点将被视为静态内容并跳过。这可以用于优化更新性能。
 
-
-
+### Vue中CSS动画原理
+Vue 的过渡系统有了彻底的改变，现在通过使用 `<transition>` 和 `<transition-group>` 来包裹元素实现过渡效果，而不再使用 `transition` 属性
+![css](https://github.com/fangfeiyue/vue-qu-na/blob/master/image/animate.png)
+![css](https://github.com/fangfeiyue/vue-qu-na/blob/master/image/animate1.png)
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .v-enter,.v-leave-to{
+            opacity: 0;    
+        }
+        .v-enter-active,.v-leave-active{
+            transition: opacity 3s;
+        }
+    </style>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <transition>
+            <div v-if="show">hello world</div>
+        </transition>
+        <button @click="handleBtnClick">切换</button>
+    </div>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                show: false
+            },
+            methods: {
+                handleBtnClick: function() {
+                    this.show = !this.show
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+```
 ### 联系方式
 
 坐标：北京
