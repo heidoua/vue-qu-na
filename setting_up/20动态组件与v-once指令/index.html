@@ -16,15 +16,15 @@
     <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
     <script>
         var childOne = {
-            template: "<div>child-one</div>"
+            template: "<div v-once>child-one</div>"
         };
         
         Vue.component('child-two', {
-            template: "<div>child-two</div>"
+            template: "<div v-once>child-two</div>"
         });
 
         var childThree = {
-            template: "<div>child-three</div"
+            template: "<div v-once>child-three</div"
         };
 
         var app = new Vue({
