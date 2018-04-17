@@ -1377,6 +1377,16 @@ transition中name为string类型，用于自动生成 CSS 过渡类名。例如�
     <div v-if="show">hello world</div>
 </transition>
 ```
+我们还可以将时长定义的复杂下，比如将入场动画和出场动画时间定义的不一致。
+```
+<transition
+    ...
+    :duration="{enter:1000, leave:10000}"
+    ...
+>
+    <div v-if="show">hello world</div>
+</transition>
+```
 ### 联系方式
 
 坐标：北京
