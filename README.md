@@ -1292,6 +1292,91 @@ transition中name为string类型，用于自动生成 CSS 过渡类名。例如�
 </html>
 ```
 首先给`transition`添加`enter-active-class`和`leave-active-class`两个属性，这个两个属性分别赋值我们想给的类名（自己写的也可以哦）即可。
+
+### 在Vue中同时使用过渡和动画
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+    <style>
+        .fade-enter,
+        .fade-leave-to{
+            opacity: 0;
+        }
+        .fade-enter-active,
+        .fade-leave-active{
+            transition: opacity 10s;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <transition
+            appear
+            enter-active-class="animated flash fade-enter-active"
+            leave-active-class="animated shake fade-leave-active"
+            appear-active-class="animated swing"
+        >
+            <div v-if="show">hello world</div>
+        </transition>
+        <button @click="handleBtnClick">切换</button>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                show: true
+            },
+            methods: {
+                handleBtnClick: function(){
+                    this.show = !this.show;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+```
+上面的代码，当页面初次加载的时候并没有动画效果，下面我们给`transition`标签分别添加`appear`和`appear-active-class`两个属性。appear为bool类型，作用是是否在初始渲染时使用过渡。默认为 false。具体代码如下：
+```
+<transition
+    appear
+    type="fade"
+    appear-active-class="animated swing"
+    enter-active-class="animated flash fade-enter-active"
+    leave-active-class="animated shake fade-leave-active"
+>
+    <div v-if="show">hello world</div>
+</transition>
+```
+这个时候当页面首次加载hello world也就显示动画了。
+
+上面代码中我们还给transiton添加了自定义类`fade-enter-active`和`fade-leave-active`.我们自定义类的动画过度时间为3s，而annimate.css的动画过渡时间为1s，这个时候动画时间应该以谁为准呢？transation为我们提供type属性。type的值为字符串，指定过渡事件类型，侦听过渡何时结束。有效值为 "transition" 和 "animation"。默认 Vue.js 将自动检测出持续时间长的为过渡事件类型。由此可见我们可以自己决定动画的时长为transition的时长还是为animation的时长。我们这里用transition的时长
+```
+<transition
+    ...
+    type="transition"
+    ...
+>
+    <div v-if="show">hello world</div>
+</transition>
+```
+通过`:duration`我们还可以自己定义动画时间的总时长,单位为毫秒
+```
+<transition
+    ...
+    :duration="10000"
+    ...
+>
+    <div v-if="show">hello world</div>
+</transition>
+```
 ### 联系方式
 
 坐标：北京
