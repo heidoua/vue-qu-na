@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <fade :show="show">
+            <div>hello world</div>
+        </fade>
+        <button @click="handleBtnClick">切换</button>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+    <script>
+        
+        var fade = {
+            props: ['show'],
+            template:`<transition @before-enter="handleBeforeEnter" @enter="handleEnter">
+                        <slot v-if="show"></slot>
+                    </transition>`,
+            methods: {
+                handleBeforeEnter: function(el){
+                    el.style.color = "red";
+                },
+                handleEnter: function(el, done){
+                    setTimeout(() => {
+                        el.style.color = "yellow";
+                        done();
+                    }, 2000);
+                }
+            }
+        };
+
+        var app = new Vue({
+            el: '#app',
+            components: {
+                fade
+            },
+            data: {
+                show: true
+            },
+            methods: {
+                handleBtnClick: function(){
+                    this.show = !this.show;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

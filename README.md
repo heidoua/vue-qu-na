@@ -1387,6 +1387,114 @@ transition中name为string类型，用于自动生成 CSS 过渡类名。例如�
     <div v-if="show">hello world</div>
 </transition>
 ```
+### Vue中的列表过渡
+上面的代码我们只是给单个dom元素添加了动画效果，如果我们想给一组dom添加动画该怎么办呢？Vue为我们提供了`transition-group`，大体用法和`transition`一样，demo如下
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .v-enter, .v-leave-to{
+            opacity: 0;
+        }
+        .v-enter-active,.v-leave-active{
+            transition: opacity 3s;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <transition-group>
+            <div v-for="item of list" :key="item.id">{{item.title}}</div>
+        </transition-group>
+        <button @click="handleBtnClick">添加</button>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+    <script>
+        var count = 0;
+        var app = new Vue({
+            el: '#app',
+            data: {
+                list: []
+            },
+            methods: {
+                handleBtnClick: function(){
+                    this.list.push({
+                        id: count++,
+                        title: 'hello world'+count
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+```
+### Vue中的动画封装
+
+如果我们需要很多类似的动画每次都用`transition`来操作未免太过重复，繁琐，这个时候我们可以把动画效果一样的代码进行封装，以后使用的时候直接调用封装的代码即可。如下代码是个简单的demo，demo很简单就是讲动画封装成了一个组件，组件中的显示的元素用`slot`传递。
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <fade :show="show">
+            <div>hello world</div>
+        </fade>
+        <fade :show="show">
+            <h1>hello world</h1>
+        </fade>
+        <button @click="handleBtnClick">切换</button>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+    <script>
+        
+        var fade = {
+            props: ['show'],
+            template:`<transition @before-enter="handleBeforeEnter" @enter="handleEnter">
+                        <slot v-if="show"></slot>
+                    </transition>`,
+            methods: {
+                handleBeforeEnter: function(el){
+                    el.style.color = "red";
+                },
+                handleEnter: function(el, done){
+                    setTimeout(() => {
+                        el.style.color = "yellow";
+                        done();
+                    }, 2000);
+                }
+            }
+        };
+
+        var app = new Vue({
+            el: '#app',
+            components: {
+                fade
+            },
+            data: {
+                show: true
+            },
+            methods: {
+                handleBtnClick: function(){
+                    this.show = !this.show;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+```
 ### 联系方式
 
 坐标：北京

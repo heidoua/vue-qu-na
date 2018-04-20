@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <transition
+            @before-enter="handleBeforeEnter"
+            @enter="handleEnter"
+            @after-enter="handleAfterEnter"
+        >
+            <div v-if="show">hello world</div>
+        </transition>
+        <button @click="handleBtnClick">切换</button>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+    <script src="https://cdn.bootcss.com/velocity/2.0.2/velocity.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                show: true
+            },
+            methods: {
+                handleBtnClick: function(){
+                    this.show = !this.show;
+                },
+                handleBeforeEnter: function(el){
+                    el.style.opacity = 0;
+                },
+                handleEnter: function(el, done){
+                    Velocity(el, {opacity: 1}, {
+                            duration: 1000,
+                            complete: done
+                        }
+                    );
+                },
+                handleAfterEnter: function(el) {
+                    alert('动画结束');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
