@@ -15,7 +15,7 @@ git clone https://github.com/fangfeiyue/vue-qu-na.git
 - image文件主要放了一些readme文件需要的图片
 - setting_up梳理项目前期的一些知识点，方便初学Vue的同学学习
 - project是项目文件
-## 项目截图
+### 项目截图
 ## 项目前期知识准备
 ### MVVM模式
 
@@ -1496,6 +1496,42 @@ transition中name为string类型，用于自动生成 CSS 过渡类名。例如�
 </body>
 </html>
 ```
+
+### 项目总结
+
+1. 多页应用：当每次用户浏览不同的页面，服务器都会返回不同的html文件。
+
+多页应用的特点：
+
+- 优点
+    - 首屏时间快
+    - seo效果好
+- 缺点
+    - 页面切换慢
+
+2. 单页应用在页面跳转的时候并不是每次都请求一个新的html文件，而是通过js动态的来更换页面需要显示的数据并渲染dom元素，
+
+单页应用的特点：
+- 优点
+    - 页面切换快
+- 缺点
+    - 首屏时间稍慢
+    - SEO差
+
+3. Vue中页面跳转可以使用`router-link`跳转，功能相当于`a`标签
+```
+<router-link to="/list">列表页</router-link>
+```
+
+4. 在vue单个组件文件中的`template`只能返回一个dom标签，如果有多个标签需要返回，外面需要包裹一层html标签
+```
+<template>
+  <div>
+    <div>hello world</div>
+     <router-link to="/list">列表页</router-link>
+  </div>
+</template>
+```
 ### 联系方式
 
 坐标：北京
@@ -1503,9 +1539,3 @@ transition中name为string类型，用于自动生成 CSS 过渡类名。例如�
 QQ：294925572
 
 QQ技术交流群：678941904 ( 欢迎加入此群，与志同道合的朋友一起进步 )
-
-
-
-
-
-
