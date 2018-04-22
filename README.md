@@ -1532,6 +1532,8 @@ transition中name为string类型，用于自动生成 CSS 过渡类名。例如�
   </div>
 </template>
 ```
+## 彩蛋
+- vscode stylus插件language-stylus
 ### 联系方式
 
 坐标：北京
