@@ -1574,6 +1574,20 @@ export default {
 </style>
 
 ```
+
+7. 在项目中当文字过长我们希望显示三个省略号，这个css样式可能在很多地方都会用的到，这个时候我们可以将他抽离出来，利用stylus实现,单独新建一个文件命名为mixins.styl然后将显示省略的代码写到这个文件中
+```
+ellipsis()
+  overflow: hidden
+  white-space: nowrap
+  text-overflow: ellipsis
+```
+当我们需要使用这个功能时，可以用`import`引入这个文件，在对应的`stylus`代码中引入`ellipsis()`即可
+```
+ @import '~styles/mixins.styl'
+ .icon-desc
+  ellipsis()
+```
 ## 彩蛋
 - vscode stylus插件language-stylus
 ### 联系方式
