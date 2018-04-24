@@ -49,7 +49,6 @@ export default {
 <style lang="stylus" scoped>
     @import '~styles/mixins.styl'
     .weekend-title
-        margin-top .2rem
         line-height .8rem
         background-color #eeeeee
         text-indent .2rem
