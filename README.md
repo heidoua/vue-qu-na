@@ -1588,6 +1588,46 @@ ellipsis()
  .icon-desc
   ellipsis()
 ```
+
+8. 因为项目没有直接调用线上的接口，数据是本地模拟的，如果我们像下面这样直接请求在开发的过程中是可以的
+```
+axios.get('/static/mock/index.json').then(this.getHomeInfoSuccess)
+```
+但如果当我们发布上线因为本地的模拟的数据不发布，就会找不到index.json，
+```
+axios.get('/api/index.json').then(this.getHomeInfoSuccess)
+```
+我们需要对webpack-dev-server进行配置，让它帮我们将请求转发到本地的static/mock文件下
+```
+proxyTable: {
+    '/api': {
+    target: 'http://localhost:8080',
+    pathRewrite: {
+        '^/api': '/static/mock'
+    }
+    }
+}
+```
+
+9. 在给旅游景点布局的时候，用到了flex:1，当旅游景点的标题过长需要出现省略号，当我直接给放标题的元素设置
+```
+overflow: hidden
+white-space: nowrap
+text-overflow: ellipsis
+```
+并没有出现省略号，改怎么实现呢？可以给父标签设置`min-height: 0`试试
+```
+.item-info
+    flex 1
+    padding .1rem
+    min-width 0
+    .item-title
+        line-height .54rem
+        font-size .32rem
+        overflow: hidden
+        white-space: nowrap
+        text-overflow: ellipsis
+```
 ## 彩蛋
 - vscode stylus插件language-stylus
 ### 联系方式
