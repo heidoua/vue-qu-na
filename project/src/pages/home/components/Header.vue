@@ -7,11 +7,13 @@
             <span class="iconfont">&#xe600;</span>
             输入城市/景点/游玩主题
         </div>
-        <div class="header-right">
-            <!-- 两个inline元素之间可能存在空白间距，可以给父级设置fontsize0，子元素再设置对应的字体即可 -->
-            {{this.city}}
-            <span class="iconfont arrow-icon">&#xe791;</span>
-        </div>
+        <router-link to="/city">
+            <div class="header-right">
+                <!-- 两个inline元素之间可能存在空白间距，可以给父级设置fontsize0，子元素再设置对应的字体即可 -->
+                {{this.city}}
+                <span class="iconfont arrow-icon">&#xe791;</span>
+            </div>
+        </router-link>
   </div>
 </template>
 
