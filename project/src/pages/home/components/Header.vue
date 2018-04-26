@@ -51,6 +51,7 @@ export default {
             border-radius: .1rem
         .header-right
             width: 1.24rem
+            color: #fff
             float: right
             text-align: center
             .arrow-icon
