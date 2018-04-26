@@ -156,12 +156,11 @@
 <script>
 import Bscroll from 'better-scroll'
 export default {
-  name: "List",
+  name: 'List',
   mounted () {
-    this.scroll = new Bscroll(this.$refs.wrapper);
-
+    this.scroll = new Bscroll(this.$refs.wrapper)
   }
-};
+}
 </script>
 
 <style lang="stylus" scoped>
