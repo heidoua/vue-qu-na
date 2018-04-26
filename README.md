@@ -1643,6 +1643,7 @@ computed: {
 ```
 ## 彩蛋
 - vscode stylus插件language-stylus
+- 滑动组件 better-scroll
 ### 联系方式
 
 坐标：北京
