@@ -9,7 +9,7 @@
         </div>
         <div class="header-right">
             <!-- 两个inline元素之间可能存在空白间距，可以给父级设置fontsize0，子元素再设置对应的字体即可 -->
-            城市
+            {{this.city}}
             <span class="iconfont arrow-icon">&#xe791;</span>
         </div>
   </div>
@@ -17,7 +17,10 @@
 
 <script>
 export default {
-  name: 'HomeHeader'
+  name: 'HomeHeader',
+  props: {
+    city: String
+  }
 }
 </script>
 

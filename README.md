@@ -1628,6 +1628,19 @@ text-overflow: ellipsis
         white-space: nowrap
         text-overflow: ellipsis
 ```
+
+10. 首页的轮播图如果我们通过接口获取数据的话，因为接口请求需要一定的时间，这时我们为了防止报错，给轮播图的数据默认赋值了空数组，刚开始这个数组没有值，当有值的时候轮播图默认显示到最后一个了。解决办法是加一个条件判断，只有这个数组有值的时候才渲染轮播图组件
+```
+<swiper :options="swiperOption" v-if="showSwiper">
+    ...
+</swiper>
+
+computed: {
+    showSwiper () {
+      return this.swiperList.length
+    }
+}
+```
 ## 彩蛋
 - vscode stylus插件language-stylus
 ### 联系方式
