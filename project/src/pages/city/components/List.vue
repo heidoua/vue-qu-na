@@ -47,16 +47,16 @@ export default {
   props: {
     hotCities: Array,
     cities: Object,
-    letter : String
+    letter: String
   },
   mounted () {
     this.scroll = new Bscroll(this.$refs.wrapper)
   },
-  watch :{
-      letter(){
-          let ele = this.$refs[this.letter][0];
-          this.scroll.scrollToElement(ele);
-      }
+  watch: {
+    letter () {
+      let ele = this.$refs[this.letter][0]
+      this.scroll.scrollToElement(ele)
+    }
   }
 }
 </script>

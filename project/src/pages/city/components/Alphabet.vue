@@ -10,9 +10,9 @@ export default {
   props: {
     cities: Object
   },
-  methods:{
-    handleLetterClick(e){
-      this.$emit('handleLetterClick',e.target.innerText);
+  methods: {
+    handleLetterClick (e) {
+      this.$emit('handleLetterClick', e.target.innerText)
     }
   }
 }

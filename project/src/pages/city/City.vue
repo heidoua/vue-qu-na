@@ -41,8 +41,8 @@ export default {
       }
       console.log(res)
     },
-    handleLetterClick(letter){
-        this.letter = letter;
+    handleLetterClick (letter) {
+      this.letter = letter
     }
   },
   mounted () {
