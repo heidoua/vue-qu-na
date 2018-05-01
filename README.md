@@ -1658,6 +1658,19 @@ computed: {
 ```
 @touchstart.prevent="handleTouchStart"
 ```
+
+13. 某些低版本手机中打开项目会出现白屏的现象，造成白屏的原因一般有两个。
+
+- 低版本手机中的浏览器不支持promise，解决办法：安装`babel-polyfill`
+```
+npm install babel-polyfill --save
+```
+并在main.js文件中引入这个包
+```
+import 'babel-polyfill'
+```
+- 可能是webpack-dev-server的问题
+
 ## 彩蛋
 - vscode stylus插件language-stylus
 - 滑动组件 better-scroll
