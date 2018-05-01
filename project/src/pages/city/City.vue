@@ -2,8 +2,8 @@
     <div>
       <city-header></city-header>
       <city-search></city-search>
-      <city-list :letter = 'letter' :cities="cities" :hotCities="hotCities"></city-list>
-      <city-alphabet :cities="cities" @handleLetterClick = 'handleLetterClick'></city-alphabet>
+      <city-list :letterIndex="letterIndex" :letter = 'letter' :cities="cities" :hotCities="hotCities"></city-list>
+      <city-alphabet :cities="cities" @handleLetterClick="handleLetterClick"></city-alphabet>
     </div>
 </template>
 
@@ -25,7 +25,8 @@ export default {
     return {
       cities: {},
       hotCities: [],
-      letter: ''
+      letter: '',
+      letterIndex: 0
     }
   },
   methods: {

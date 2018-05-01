@@ -47,7 +47,8 @@ export default {
   props: {
     hotCities: Array,
     cities: Object,
-    letter: String
+    letter: String,
+    letterIndex: Number
   },
   mounted () {
     this.scroll = new Bscroll(this.$refs.wrapper)
