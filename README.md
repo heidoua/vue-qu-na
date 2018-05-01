@@ -1641,6 +1641,15 @@ computed: {
     }
 }
 ```
+
+11. 因为项目我们用的webpack-dev-server当服务器启动的，所以不支持将localhost换成ip地址访问项目，这个时候我们需要对package.json文件进行配置,在package.json文件中找到如下代码
+```
+"dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js"
+```
+然后再--inline前面加上--host 0.0.0.0修改完成后的代码如下
+```
+"dev": "webpack-dev-server --host 0.0.0.0 --inline --progress --config build/webpack.dev.conf.js"
+```
 ## 彩蛋
 - vscode stylus插件language-stylus
 - 滑动组件 better-scroll
