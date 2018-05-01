@@ -1650,6 +1650,14 @@ computed: {
 ```
 "dev": "webpack-dev-server --host 0.0.0.0 --inline --progress --config build/webpack.dev.conf.js"
 ```
+
+12. 当我们在手机上拖动城市右侧字母表的时候，会出现整个页面都在跟着拖动
+
+解决办法，打开Alphabet.vue文件在`touchstart`后加`prevent`属性禁止掉touchstart的默认事件,
+
+```
+@touchstart.prevent="handleTouchStart"
+```
 ## 彩蛋
 - vscode stylus插件language-stylus
 - 滑动组件 better-scroll
