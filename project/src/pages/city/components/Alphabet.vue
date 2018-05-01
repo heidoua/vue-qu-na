@@ -38,7 +38,6 @@ export default {
         const startY = this.$refs['A'][0].offsetTop
         const touchY = e.touches[0].clientY - 79
         const index = Math.floor((touchY - startY) / 20)
-        console.log(index);
         if (index >= 0 && index < this.letters.length) {
           this.$emit('handleLetterClick', this.letters[index])
         }
