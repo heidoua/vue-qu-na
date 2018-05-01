@@ -1,6 +1,6 @@
 <template>
   <ul class="list">
-    <li class="item" v-for="(item, key) of cities" :key="key" @click = 'handleLetterClick'>{{key}}</li>
+    <li class="item" v-for="(item, key) of cities" :key="key" @click="handleLetterClick">{{key}}</li>
   </ul>
 </template>
 
