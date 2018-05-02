@@ -1680,6 +1680,8 @@ proxyTable: {
 }
 ```
 
+15. 项目打包：用命令行打开项目，然后在命令行中输入`npm run build`将生成的dist文件下的内容放到服务器的根目录即可，如果想放到特定的目录中运行，例如qunar，我们需要打包的时候对webpack进行配置，打开config文件下的index.js，找到`assetsPublicPath: '/'`修改为`  assetsPublicPath: '/qunar'`然后再运行npm run build，将dist目录下的qunar放到服务器根目录即可
+
 ## 彩蛋
 - vscode stylus插件language-stylus
 - 滑动组件 better-scroll
