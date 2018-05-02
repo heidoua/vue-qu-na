@@ -5,6 +5,12 @@
 ```
 git clone https://github.com/fangfeiyue/vue-qu-na.git
 ```
+### 运行项目
+```
+npm install
+npm start
+浏览器输入localhost:8080回车即可
+```
 ### 技术选型
 - 版本控制：git
 - 开发工具：vscode
