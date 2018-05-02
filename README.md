@@ -1682,6 +1682,24 @@ proxyTable: {
 
 15. 项目打包：用命令行打开项目，然后在命令行中输入`npm run build`将生成的dist文件下的内容放到服务器的根目录即可，如果想放到特定的目录中运行，例如qunar，我们需要打包的时候对webpack进行配置，打开config文件下的index.js，找到`assetsPublicPath: '/'`修改为`  assetsPublicPath: '/qunar'`然后再运行npm run build，将dist目录修改为qunar放到服务器根目录即可
 
+16. 当我们打包后会生成三个js文件，其中app.js是我们所有的业务代码，当我们在浏览器中开发首页的时候，发现加载app.js文件，这显示是有问题的，因为app.js是我们所有的业务代码，我们只访问了首页，他不应该把city里面的js也加载出来。这个时候我们就需要使用异步组件实现按需加载了。打开router文件夹下index.js文件，修改如下
+```
+export default new Router({
+  routes: [
+    {
+      path: '/',
+      name: 'Home',
+      component: () => import('@/pages/home/Home')
+    }, {
+      path: '/city',
+      name: 'City',
+      component: () => import('@/pages/city/City')
+    }
+  ]
+})
+```
+然后再运行代码，发现每次进入新的页面都会请求对应页面的js文件。虽然按照上述操作帮我们实现了按需加载，但不是任何情况下都需要这样操作的，按需加载在减少了首屏加载的文件大小的同时也增加了http请求的次数，因为当你在访问其他页面的时候会重新其他页面的js逻辑代码。如果我们的app.js文件特别小的时候，就没必要用按需加载了，因为多发一次http请求比首页多加载一点js代码的代价要高
+
 ## 彩蛋
 - vscode stylus插件language-stylus
 - 滑动组件 better-scroll
