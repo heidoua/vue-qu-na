@@ -1671,6 +1671,15 @@ import 'babel-polyfill'
 ```
 - 可能是webpack-dev-server的问题
 
+14. 当我们在项目前后端联调的时候，有时可能接口会出现跨域的情况，这个时候我们无需使用charles做代理，直接配置webpack-dev-server即可，将target配置成服务器接口的地址就行
+```
+proxyTable: {
+    '/api': {
+        target: 'http://localhost:8080'
+    }
+}
+```
+
 ## 彩蛋
 - vscode stylus插件language-stylus
 - 滑动组件 better-scroll
