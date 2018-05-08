@@ -49,7 +49,8 @@ export default {
             background-color:#fff
             border-radius: .1rem
         .header-right
-            width: 1.24rem
+            min-width: 1.04rem
+            padding 0.1rem
             color: #fff
             float: right
             text-align: center

@@ -12,7 +12,7 @@ const store = new Vuex.Store({
       ctx.commit('changeCity', city)
     }
   },
-  mutations 
+  mutations
 })
 
 export default store
