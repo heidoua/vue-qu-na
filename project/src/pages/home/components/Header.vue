@@ -10,7 +10,7 @@
         <router-link to="/city">
             <div class="header-right">
                 <!-- 两个inline元素之间可能存在空白间距，可以给父级设置fontsize0，子元素再设置对应的字体即可 -->
-                {{this.$store.state.city}}
+                {{this.currentCity}}
                 <span class="iconfont arrow-icon">&#xe791;</span>
             </div>
         </router-link>
@@ -18,9 +18,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'HomeHeader',
   props: {
+  },
+  computed: {
+    ...mapState({
+      currentCity: 'city'
+    })
   }
 }
 </script>
@@ -50,7 +56,7 @@ export default {
             border-radius: .1rem
         .header-right
             min-width: 1.04rem
-            padding 0.1rem
+            padding 0 0.1rem
             color: #fff
             float: right
             text-align: center

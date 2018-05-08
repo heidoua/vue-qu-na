@@ -5,7 +5,7 @@
         </div>
         <div class="search-content" v-show="keyworld" ref="search">
             <ul>
-                <li class="search-item border-bottom" v-for="item of list" :key="item.id">{{item.name}}</li>
+                <li @click="handleChangeCity(item.name)" class="search-item border-bottom" v-for="item of list" :key="item.id">{{item.name}}</li>
                 <li class="search-item border-bottom" v-show="hasNoData">没有找到匹配数据</li>
             </ul>
         </div>
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import Bscroll from 'better-scroll'
 export default {
   name: 'Search',
@@ -30,6 +31,13 @@ export default {
     hasNoData () {
       return !this.list.length
     }
+  },
+  methods: {
+    handleChangeCity (city) {
+      this.changeCity(city)
+      this.$router.push('/')
+    },
+    ...mapMutations(['changeCity'])
   },
   watch: {
     keyworld () {
