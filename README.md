@@ -1727,6 +1727,43 @@ export default {
 但是我们又遇到了新的问题，当我们从城市选择页选择一个页面返回首页的时候，首页数据应该重新请求选中城市的数据。可是当我们使用keep-alive的使用，首页数据也不再重新请求了，这个时候该怎么办呢？
 
 当我们使用keep-alive的时候会多出一个``方法供我们使用
+
+18. 项目中当我们点击热销推荐列表中的条目时，应该跳转到对应的详情页，这时我们可以用router-link包裹对应的li标签，但是此时li里面的文字会默认变成蓝色，这并不是我们想要的。我们可以将li标签替换成router-link，具体代码如下
+```
+<router-link tag="li" class="item border-bottom" v-for="item of recommendList" :key="item.id" :to="'/detial/'+item.id">
+    ....
+</router-link>
+```
+
+19. 当我们点击热门推荐中的条目时需要传递条目的id跳转到详情页，详情页根据id的不同显示不同的详情内容。这个时候我们就需要使用到动态路由了，在path属性中添加'/detail/:id'，作用是跳转到详情页，详情页根据id的不同显示不同的详情页。
+```
+export default new Router({
+  routes: [
+    {
+      path: '/detail/:id',
+      name: 'Detail',
+      component: Detail
+    }
+  ]
+})
+```
+
+20. 项目中的icon我封装了一个小小的Icon组件,以后使用icon图片的时候可以在对应组件中如下使用
+```
+import Icon from 'base'
+
+<template>
+    <div class="banner-number">
+        <Icon name="tupian" className="banner-icon"/>
+    </div>
+</template>
+```
+在封装这个小小的组件的时候，阿里的矢量图库使用的时候要给标签增加两个类，分别为iconfont和icon-图标名称，因为icon的名字是从父组件传递的,所以是动态给第二个类名赋值的，刚开始使用了做react项目中的方法``iconfont icon-${name}``并没有任何效果，查了vue的官方文档才知道要绑定下才行，具体代码如下
+```
+<template>
+  <i :class="'iconfont icon-'+name + ' ' +className"></i>
+</template>
+```
 ## 彩蛋
 - vscode stylus插件language-stylus
 - 滑动组件 better-scroll
