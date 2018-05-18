@@ -1,2 +1,3 @@
 import Icon from './icon/Icon'
-export default Icon
+import CommonGallary from './gallary/Gallary'
+export {Icon, CommonGallary}
