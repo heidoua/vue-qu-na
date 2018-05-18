@@ -1764,6 +1764,27 @@ import Icon from 'base'
   <i :class="'iconfont icon-'+name + ' ' +className"></i>
 </template>
 ```
+
+21. 点击详情页banner需要弹出画廊组件，画廊组件使用swiper做的，设计图上分页显示器是数字并且显示在文字的下方，这个时候查看分页器的样式，发现bottom是10px，我把它改成-50px发现看不到分页器了，查看swiper的dom元素发现swiper-container设置了overflow:hidden，然后我将overflow改为overlow:inherit就可以了
+```
+.container >>> .swiper-container
+    overflow inherit
+
+
+.swiper-pagination
+    color #fff
+    bottom -1rem
+```
+
+22. 点击详情页banner后需要弹出画廊组件，当拖动画廊组件图片时发现拖动的图片移动出错，这就奇怪了！这是为啥呢？？？查找的了资料才发现需要设置`observeParents`和`observer`来解决这个问题
+```
+swiperOption: {
+    // 将observe应用于Swiper的父元素。当Swiper的父元素变化时，例如window.resize，Swiper更新。
+    observeParents: true,
+    // 启动动态检查器(OB/观众/观看者)，当改变swiper的样式（例如隐藏/显示）或者修改swiper的子元素时，自动初始化swiper。默认false，不开启，可以使用update()方法更新。
+    observer: true
+}
+```
 ## 彩蛋
 - vscode stylus插件language-stylus
 - 滑动组件 better-scroll
