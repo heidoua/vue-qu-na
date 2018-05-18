@@ -7,7 +7,12 @@ export default {
   name: 'Icon',
   props: {
     name: String,
-    className: String
+    className: {
+      type: String,
+      default () {
+        return ''
+      }
+    }
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="banner">
+    <div class="banner" @click="handleBannerClick">
       <img class="banner-img" src="//img1.qunarzz.com/sight/p0/1803/7b/7b023b9728f0834fa3.img.jpg_600x330_5f4c76f7.jpg" alt="">
       <div class="banner-info">
         <div class="banner-title">
@@ -11,18 +11,31 @@
         </div>
       </div>
     </div>
-    <CommonGallary />
+    <CommonGallary @close="handleGallaryClose" v-show="showGallay" :imgs="imgs"/>
   </div>
 </template>
 
 <script>
 import { Icon, CommonGallary } from 'base'
-import Icon  from 'base'
 export default {
   name: 'Banner',
   components: {
     Icon,
     CommonGallary
+  },
+  data () {
+    return {
+      showGallay: false,
+      imgs: ['http://img1.qunarzz.com/sight/p0/1409/19/adca619faaab0898245dc4ec482b5722.jpg_r_800x800_6edd8174.jpg']
+    }
+  },
+  methods: {
+    handleBannerClick () {
+      this.showGallay = true
+    },
+    handleGallaryClose () {
+      this.showGallay = false
+    }
   }
 }
 </script>
