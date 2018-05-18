@@ -41,7 +41,7 @@ export default {
   activated () {
     window.addEventListener('scroll', this.handleScroll)
   },
-  destroyed () {
+  deactivated () {
     window.removeEventListener('scroll', this.handleScroll)
   }
 }

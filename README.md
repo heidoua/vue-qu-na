@@ -1785,6 +1785,16 @@ swiperOption: {
     observer: true
 }
 ```
+
+23. 在做详情页header随着详情页滚动渐隐渐现时给window对象添加了scroll事件，因为使用了keep-alive所以给window对象添加事件、移除事件都需要在keep-alive对应生命周期函数中操作，具体代码如下
+```
+activated () {
+    window.addEventListener('scroll', this.handleScroll)
+},
+deactivated () {
+    window.removeEventListener('scroll', this.handleScroll)
+}
+```
 ## 彩蛋
 - vscode stylus插件language-stylus
 - 滑动组件 better-scroll
