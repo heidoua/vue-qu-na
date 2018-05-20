@@ -1795,6 +1795,35 @@ deactivated () {
     window.removeEventListener('scroll', this.handleScroll)
 }
 ```
+
+24. 怎么获取详情页路由中的id呢
+```
+this.$route.params.id
+```
+
+25. 当我们在首页向上滚动热销列表时，然后再点击热销列表中查看详情会发现，一进入详情页详情页面发生了滚动,解决办法需要router文件中给router添加`scrollBehavior`属性，具体代码如下
+```
+export default new Router({
+  routes: [
+    {
+      path: '/',
+      name: 'Home',
+      component: Home
+    }
+  ],
+  scrollBehavior: function (to, from, savedPosition) {
+    return savedPosition || { x: 0, y: 0 }
+  }
+})
+```
+
+26. 因为我们使用了`keep-alive`,进入详情页的时候只会请求一次数据，但详情页的数据应该随着不同的入口而发生变化，也就是每次进入详情页应该去请求数据,我们可以给APP.vue组件添加属性`exclude`属性，该属性值为字符串或正则表达式，意思为任何匹配的组件都不会被缓存。具体代码如下
+```
+<keep-alive exclude="detail">
+    <router-view/>
+</keep-alive>
+```
+意思是详情页组件不被缓存，每次进入详情页都要执行mounted函数
 ## 彩蛋
 - vscode stylus插件language-stylus
 - 滑动组件 better-scroll

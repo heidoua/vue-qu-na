@@ -1,18 +1,18 @@
 <template>
   <div>
     <div class="banner" @click="handleBannerClick">
-      <img class="banner-img" src="//img1.qunarzz.com/sight/p0/1803/7b/7b023b9728f0834fa3.img.jpg_600x330_5f4c76f7.jpg" alt="">
+      <img class="banner-img" :src="bannerImg" alt="">
       <div class="banner-info">
         <div class="banner-title">
-          世界花卉大观园(AAAA景区)
+          {{sightName}}
         </div>
         <div class="banner-number">
-          <Icon name="tupian" className="banner-icon"/> 39
+          <Icon name="tupian" className="banner-icon"/>{{this.gallaryImgs.length}}
         </div>
       </div>
     </div>
     <fade-animation>
-      <CommonGallary @close="handleGallaryClose" v-show="showGallay" :imgs="imgs"/>
+      <CommonGallary @close="handleGallaryClose" v-show="showGallay" :imgs="gallaryImgs"/>
     </fade-animation>
   </div>
 </template>
@@ -21,6 +21,11 @@
 import { Icon, CommonGallary, FadeAnimation } from 'base'
 export default {
   name: 'Banner',
+  props: {
+    gallaryImgs: Array,
+    sightName: String,
+    bannerImg: String
+  },
   components: {
     Icon,
     CommonGallary,
