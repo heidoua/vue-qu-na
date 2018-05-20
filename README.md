@@ -22,6 +22,7 @@ npm start
 - setting_up梳理项目前期的一些知识点，方便初学Vue的同学学习
 - project是项目文件
 ### 项目截图
+![项目截图](https://github.com/fangfeiyue/vue-qu-na/blob/master/image/qunar.gif)
 ## 项目前期知识准备
 ### MVVM模式
 
