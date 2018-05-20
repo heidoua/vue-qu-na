@@ -1,6 +1,8 @@
 # 项目简介
 公司项目一直采用的是React全家桶开发的。近期公司让做一款项目，由于不是很急打算用Vue开发试试尝尝鲜。由于接口、UI都还没完事，自己先借这个git项目先熟悉熟悉Vue，把Vue中常用的知识点总结下方便自己的同时也方便他人。本项目从Vue基础语法入手，逐层递进，让您更好的掌握Vue各个基础知识点。包括Vue中的CSS动画原理、Vue中使用animate.css库、Vue中同时使用过渡与动画效果、Vue中使用Velocity.js库、Vue中多组件和列表过度 、Vue中动画的封装、vuex等等
 
+### 项目截图
+![项目截图](https://github.com/fangfeiyue/vue-qu-na/blob/master/image/qunar.gif)
 ### 下载源码
 ```
 git clone https://github.com/fangfeiyue/vue-qu-na.git
@@ -21,8 +23,6 @@ npm start
 - image文件主要放了一些readme文件需要的图片
 - setting_up梳理项目前期的一些知识点，方便初学Vue的同学学习
 - project是项目文件
-### 项目截图
-![项目截图](https://github.com/fangfeiyue/vue-qu-na/blob/master/image/qunar.gif)
 ## 项目前期知识准备
 ### MVVM模式
 
