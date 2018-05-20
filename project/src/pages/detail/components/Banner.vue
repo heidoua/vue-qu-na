@@ -11,17 +11,20 @@
         </div>
       </div>
     </div>
-    <CommonGallary @close="handleGallaryClose" v-show="showGallay" :imgs="imgs"/>
+    <fade-animation>
+      <CommonGallary @close="handleGallaryClose" v-show="showGallay" :imgs="imgs"/>
+    </fade-animation>
   </div>
 </template>
 
 <script>
-import { Icon, CommonGallary } from 'base'
+import { Icon, CommonGallary, FadeAnimation } from 'base'
 export default {
   name: 'Banner',
   components: {
     Icon,
-    CommonGallary
+    CommonGallary,
+    FadeAnimation
   },
   data () {
     return {
